@@ -1,12 +1,42 @@
 
 version: 2
 
+sources:
+  - name: PUBLIC
+    tables:
+      - name: DEMOGRAPHICS
+      - name : DATABANK_DEMOGRAPH
+      - name : CT_US_COVID_TESTS
+      - name : covid_before_test
+
 models:
     - name: my_first_dbt_model
       description: "A starter dbt model"
       columns:
-          - name: id
+          - name: FIPS
             description: "The primary key for this table"
             tests:
                 - unique
                 - not_null
+
+    - name: my_second_dbt_model
+      description: "A starter dbt model"
+ #     columns:
+  #        - name: id
+   #         description: "The primary key for this table"
+   #         tests:
+    #            - unique
+    #            - not_null
+
+    - name: covid_test
+      description: "A starter dbt model"
+      columns:
+          - name: DATE
+            description: "The Date"
+            tests:
+                - unique
+                - not_null
+          - name: total_new_cases
+            tests:
+                - positive_cases:
+                    column_name: total_new_cases
